@@ -1,7 +1,7 @@
 # Main
-from utils.console import print_markdown
 from rich.console import Console
-from reddit.subreddit import get_subreddit_threads
+
+from reddit.subreddit import get_subreddit_threads, traduir
 from video_creation.background import download_background, chop_background_video
 from video_creation.voices import save_text_to_mp3
 from video_creation.screenshot_downloader import download_screenshots_of_reddit_posts
@@ -21,10 +21,6 @@ REQUIRED_VALUES = [
     "OPACITY",
 ]
 
-
-print_markdown(
-    "### Thanks for using this tool! [Feel free to contribute to this project on GitHub!](https://lewismenelaws.com) If you have any questions, feel free to reach out to me on Twitter or submit a GitHub issue."
-)
 
 """
 
@@ -87,6 +83,7 @@ console.log("[bold green]Enviroment Variables are set! Continuing...")
 
 if configured:
     reddit_object = get_subreddit_threads()
+    traduir(reddit_object)
     length, number_of_comments = save_text_to_mp3(reddit_object)
     download_screenshots_of_reddit_posts(
         reddit_object, number_of_comments, os.getenv("THEME", "light")

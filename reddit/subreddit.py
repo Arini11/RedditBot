@@ -1,6 +1,7 @@
 from rich.console import Console
 from utils.console import print_markdown, print_step, print_substep
 from dotenv import load_dotenv
+from python_translator import Translator
 
 console = Console()
 import os, random, praw, re
@@ -80,3 +81,21 @@ def get_subreddit_threads():
     print_substep("Received AskReddit threads successfully.", style="bold green")
 
     return content
+
+
+def traduir(reddit_object):
+    translator = Translator()
+
+    # Traduir títol
+    console.log("Traduint títol...")
+    titol = reddit_object["thread_title"]
+    reddit_object["thread_title"] = str(translator.translate(titol, "spanish", "english"))
+
+    #Traduir comentaris
+    console.log("Traduint comentaris...")
+    max = 5 # Màxim de comentaris a traduir, de moment, si no tarda massa a fer totes les traduccions
+    for c in reddit_object["comments"]:
+        comment_body = c["comment_body"]
+        c["comment_body"] = str(translator.translate(comment_body, "spanish", "english"))
+        max=max-1
+        if max <= 0: break

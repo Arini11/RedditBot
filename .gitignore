@@ -5,3 +5,5 @@ assets/
 examples/
 .idea/
 venv/
+*.mp4
+reddit/__pycache__/
