@@ -1,0 +1,20 @@
+REDDIT_CLIENT_ID="Nt3YHtNm3KeD_p7oAexqCg"
+REDDIT_CLIENT_SECRET="	NeVYYiMQR0p2C1-iVEkfzFgVYr9HIA"
+
+REDDIT_USERNAME="redditsillyck"
+REDDIT_PASSWORD="sillyck1234"
+
+# Valid options are "yes" and "no" 
+REDDIT_2FA="no"
+
+#If no, it will ask you a thread link to extract the thread, if yes it will randomize it. 
+RANDOM_THREAD="yes"
+
+# Valid options are "light" and "dark"
+THEME="light"
+
+# Enter a subreddit, e.g. "AskReddit"
+SUBREDDIT="AskReddit"
+
+# Range is 0 -> 1
+OPACITY="0.9"
