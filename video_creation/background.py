@@ -32,7 +32,7 @@ def download_background():
         }
 
         with YoutubeDL(ydl_opts) as ydl:
-            ydl.download("https://www.youtube.com/watch?v=n_Dv4JMiwK8")
+            ydl.download("https://www.youtube.com/watch?v=qu8X8UxBjjM")
 
         print_substep("Background video downloaded successfully!", style="bold green")
 
