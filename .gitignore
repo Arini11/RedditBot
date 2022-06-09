@@ -6,4 +6,5 @@ examples/
 .idea/
 venv/
 *.mp4
-reddit/__pycache__/
+**/__pycache__/
+proves/
