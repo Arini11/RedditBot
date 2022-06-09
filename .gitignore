@@ -5,3 +5,6 @@ assets/
 examples/
 .idea/
 venv/
+*.mp4
+video_creation/__pycache__/
+proves/

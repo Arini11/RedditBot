@@ -6,3 +6,5 @@ praw==7.6.0
 python-dotenv==0.20.0
 rich==12.4.4
 yt_dlp==2022.5.18
+bs4==0.0.1
+python-translator==1.0.3
