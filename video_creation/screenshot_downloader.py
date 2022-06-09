@@ -37,13 +37,17 @@ def download_screenshots_of_reddit_posts(reddit_object, screenshot_num, theme):
 
             print_substep("Post is NSFW. You are spicy...")
             page.locator('[data-testid="content-gate"] button').click()
+            # Treure un avís de +18 que queda lleig
+            page.locator('text="Click para ver 18+"').click()
+            if page.locator('text="Click to see nsfw"').is_visible():
+                page.locator('text="Click to see nsfw"').click()
 
         page.locator('[data-test-id="post-content"]').screenshot(
             path="assets/png/title.png"
         )
 
         for idx, comment in track(
-            enumerate(reddit_object["comments"]), "Downloading screenshots..."
+                enumerate(reddit_object["comments"]), "Downloading screenshots..."
         ):
 
             # Stop if we have reached the screenshot_num

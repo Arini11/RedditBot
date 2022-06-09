@@ -1,4 +1,6 @@
 from rich.console import Console
+from rich.progress import track
+
 from utils.console import print_markdown, print_step, print_substep
 from dotenv import load_dotenv
 from python_translator import Translator
@@ -87,15 +89,14 @@ def traduir(reddit_object):
     translator = Translator()
 
     # Traduir títol
-    console.log("Traduint títol...")
     titol = reddit_object["thread_title"]
     reddit_object["thread_title"] = str(translator.translate(titol, "spanish", "english"))
 
     #Traduir comentaris
-    console.log("Traduint comentaris...")
-    max = 5 # Màxim de comentaris a traduir, de moment, si no tarda massa a fer totes les traduccions
-    for c in reddit_object["comments"]:
+    #console.log("Traduint comentaris...")
+    max = 5 # Màxim de comentaris a traduir, de moment ho limitem, si no tarda massa a fer totes les traduccions
+    for i,c in track(enumerate(reddit_object["comments"]), "Traduint...", style="bold yellow"):
+        if i >= max: break
+        print(c)
         comment_body = c["comment_body"]
         c["comment_body"] = str(translator.translate(comment_body, "spanish", "english"))
-        max=max-1
-        if max <= 0: break
