@@ -97,6 +97,5 @@ def traduir(reddit_object):
     max = 5 # Màxim de comentaris a traduir, de moment ho limitem, si no tarda massa a fer totes les traduccions
     for i,c in track(enumerate(reddit_object["comments"]), "Traduint...", style="bold yellow"):
         if i >= max: break
-        print(c)
         comment_body = c["comment_body"]
         c["comment_body"] = str(translator.translate(comment_body, "spanish", "english"))
