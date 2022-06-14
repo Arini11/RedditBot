@@ -1,8 +1,11 @@
+import os
+
 from playwright.sync_api import sync_playwright, ViewportSize
 from pathlib import Path
 from rich.progress import track
 from utils.console import print_step, print_substep
 import json
+
 
 
 def download_screenshots_of_reddit_posts(reddit_object, screenshot_num, theme):
@@ -17,6 +20,11 @@ def download_screenshots_of_reddit_posts(reddit_object, screenshot_num, theme):
     # ! Make sure the reddit screenshots folder exists
     Path("assets/png").mkdir(parents=True, exist_ok=True)
 
+    # Directori actual
+    pwd = os.getcwd().replace("\\","/")
+    URL_HTML = "file:///" + pwd + "/http/index.html"
+    print(URL_HTML)
+
     with sync_playwright() as p:
         print_substep("Launching Headless Browser...")
 
@@ -30,19 +38,19 @@ def download_screenshots_of_reddit_posts(reddit_object, screenshot_num, theme):
 
         # Get the thread screenshot
         page = context.new_page()
-        page.goto(reddit_object["thread_url"])
+        page.goto(URL_HTML)
         page.set_viewport_size(ViewportSize(width=1920, height=1080))
-        if page.locator('[data-testid="content-gate"]').is_visible():
-            # This means the post is NSFW and requires to click the proceed button.
+        # if page.locator('[data-testid="content-gate"]').is_visible():
+        #     # This means the post is NSFW and requires to click the proceed button.
+        #
+        #     print_substep("Post is NSFW. You are spicy...")
+        #     page.locator('[data-testid="content-gate"] button').click()
+        #     # Treure un avís de +18 que queda lleig
+        #     page.locator('text="Click para ver 18+"').click()
+        #     if page.locator('text="Click to see nsfw"').is_visible():
+        #         page.locator('text="Click to see nsfw"').click()
 
-            print_substep("Post is NSFW. You are spicy...")
-            page.locator('[data-testid="content-gate"] button').click()
-            # Treure un avís de +18 que queda lleig
-            page.locator('text="Click para ver 18+"').click()
-            if page.locator('text="Click to see nsfw"').is_visible():
-                page.locator('text="Click to see nsfw"').click()
-
-        page.locator('[data-test-id="post-content"]').screenshot(
+        page.locator('[id="titol"]').screenshot(
             path="assets/png/title.png"
         )
 
@@ -54,11 +62,11 @@ def download_screenshots_of_reddit_posts(reddit_object, screenshot_num, theme):
             if idx >= screenshot_num:
                 break
 
-            if page.locator('[data-testid="content-gate"]').is_visible():
-                page.locator('[data-testid="content-gate"] button').click()
+            # if page.locator('[data-testid="content-gate"]').is_visible():
+            #     page.locator('[data-testid="content-gate"] button').click()
 
-            page.goto(f'https://reddit.com{comment["comment_url"]}')
-            page.locator(f"#t1_{comment['comment_id']}").screenshot(
+            # page.goto(f'https://reddit.com{comment["comment_url"]}')
+            page.locator(f"#{comment['comment_id']}").screenshot(
                 path=f"assets/png/comment_{idx}.png"
             )
 
