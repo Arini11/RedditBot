@@ -1,7 +1,7 @@
 # Main
 from rich.console import Console
 
-from reddit.subreddit import get_subreddit_threads, traduir
+from reddit.subreddit import get_subreddit_threads, traduir, generarHTML
 from video_creation.background import download_background, chop_background_video
 from video_creation.voices import save_text_to_mp3
 from video_creation.screenshot_downloader import download_screenshots_of_reddit_posts
@@ -84,10 +84,11 @@ console.log("[bold green]Enviroment Variables are set! Continuing...")
 if configured:
     reddit_object = get_subreddit_threads()
     traduir(reddit_object)
-    length, number_of_comments = save_text_to_mp3(reddit_object)
-    download_screenshots_of_reddit_posts(
-        reddit_object, number_of_comments, os.getenv("THEME", "light")
-    )
-    download_background()
-    chop_background_video(length)
-    final_video = make_final_video(number_of_comments)
+    generarHTML(reddit_object)
+    # length, number_of_comments = save_text_to_mp3(reddit_object)
+    # download_screenshots_of_reddit_posts(
+    #     reddit_object, number_of_comments, os.getenv("THEME", "light")
+    # )
+    # download_background()
+    # chop_background_video(length)
+    # final_video = make_final_video(number_of_comments)
