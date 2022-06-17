@@ -8,10 +8,9 @@ from moviepy.editor import (
     CompositeVideoClip,
 )
 import re
-
+from utils.console import print_step
 from dotenv import load_dotenv
-
-from video_creation.background import *
+import os
 
 W, H = 1080, 1920
 
@@ -37,12 +36,11 @@ def make_final_video(number_of_clips):
     audio_clips = []
     for i in range(0, number_of_clips):
         audio_clips.append(AudioFileClip(f"assets/mp3/{i}.mp3"))
-    audio_clips.insert(1, AudioFileClip(f"assets/mp3/title.mp3"))
+    audio_clips.insert(0, AudioFileClip(f"assets/mp3/title.mp3"))
     try:
-        audio_clips.insert(2, AudioFileClip(f"assets/mp3/posttext.mp3"))
+        audio_clips.insert(1, AudioFileClip(f"assets/mp3/posttext.mp3"))
     except:
         OSError()
-
     audio_concat = concatenate_audioclips(audio_clips)
     audio_composite = CompositeAudioClip([audio_concat])
 
