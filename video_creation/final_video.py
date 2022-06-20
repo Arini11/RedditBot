@@ -82,13 +82,13 @@ def make_final_video(number_of_clips):
 
     image_concat.audio = audio_composite
     final = CompositeVideoClip([background_clip, image_concat])
-    filename = (re.sub('[?\"%*:|<>]', '', ("assets/VideoFinal.mp4")))
+    filename = (re.sub('[?\"%*:|<>]', '', ("assets/mp4/starter.mp4")))
     final.write_videofile(filename, fps=30, audio_codec="aac", audio_bitrate="192k")
 
     # Sobre el vídeo final, afegir un altre audio
-    videoclip = VideoFileClip("assets/VideoFinal.mp4")
+    videoclip = VideoFileClip("assets/mp4/starter.mp4")
     audioclip = AudioFileClip("assets/musica/background_music_mp3_clip.mp3")
 
     new_audioclip = CompositeAudioClip([videoclip.audio, audioclip])
     videoclip.audio = new_audioclip
-    videoclip.write_videofile("assets/VideoFinal2.mp4")
+    videoclip.write_videofile("assets/VideoFinal.mp4")
