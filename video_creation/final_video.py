@@ -26,6 +26,7 @@ def make_final_video(number_of_clips):
     VideoFileClip.reW = lambda clip: clip.resize(width=W)
     VideoFileClip.reH = lambda clip: clip.resize(width=H)
 
+    # Vídeo fons minecraft, sense àudio
     background_clip = (
         VideoFileClip("assets/mp4/clip.mp4")
             .without_audio()
@@ -41,6 +42,7 @@ def make_final_video(number_of_clips):
     try:
         audio_clips.insert(1, AudioFileClip(f"assets/mp3/posttext.mp3"))
     except:
+        print("PETA")
         OSError()
     audio_concat = concatenate_audioclips(audio_clips)
     audio_composite = CompositeAudioClip([audio_concat])
@@ -76,6 +78,7 @@ def make_final_video(number_of_clips):
     image_concat = concatenate_videoclips(image_clips).set_position(
         ("center", "center")
     )
+    print("TIPUS OBJECTE IMAGE_CONCAT:" + type(image_concat))
     image_concat.audio = audio_composite
     final = CompositeVideoClip([background_clip, image_concat])
     filename = (re.sub('[?\"%*:|<>]', '', ("assets/VideoFinal.mp4")))

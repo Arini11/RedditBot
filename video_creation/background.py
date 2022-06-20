@@ -1,3 +1,4 @@
+import os
 from random import randrange
 
 from yt_dlp import YoutubeDL
@@ -39,13 +40,24 @@ def download_background():
 
 def chop_background_video(video_length):
     print_step("Finding a spot in the background video to chop...")
-    background = VideoFileClip("assets/mp4/background.mp4")
+    background_video = VideoFileClip("assets/mp4/background.mp4")
 
-    start_time, end_time = get_start_and_end_times(video_length, background.duration)
+    start_time, end_time = get_start_and_end_times(video_length, background_video.duration)
     ffmpeg_extract_subclip(
         "assets/mp4/background.mp4",
         start_time,
         end_time,
         targetname="assets/mp4/clip.mp4",
     )
+
+    video = VideoFileClip(os.path.join("assets/musica/background_music.mp4"))
+    video.audio.write_audiofile(os.path.join("assets/musica/background_music_mp3.mp3"))
+
+    ffmpeg_extract_subclip(
+        "assets/musica/background_music_mp3.mp3",
+        start_time,
+        end_time,
+        targetname="assets/musica/background_music_mp3_clip.mp3",
+    )
+
     print_substep("Background video chopped successfully!", style="bold green")

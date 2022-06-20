@@ -1,0 +1,26 @@
+{
+  "scooters": [
+    {
+      "uuid": "ff9bb528-cf14-11ec-9d64-0242ac120002",
+      "name": "TGN-S0001",
+      "longitude": 41.132093087476754,
+      "latitude": 1.2445664179123956,
+      "battery_level": 100.0,
+      "km_use": 0.0,
+      "date_last_maintenance": "2022-05-08T21:25:40Z",
+      "state": "ACTIVE",
+      "on_rent": false
+    },
+    {
+      "uuid": "uuid2",
+      "name": "CDZ-6560",
+      "longitude": 41.132093087476754,
+      "latitude": 1.2445664179123956,
+      "battery_level": 100.0,
+      "km_use": 0.0,
+      "date_last_maintenance": "2022-05-08T21:25:40Z",
+      "state": "ACTIVE",
+      "on_rent": false
+    }
+  ]
+}
