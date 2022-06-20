@@ -79,7 +79,7 @@ def make_final_video(number_of_clips):
     image_concat = concatenate_videoclips(image_clips).set_position(
         ("center", "center")
     )
-    print("TIPUS OBJECTE IMAGE_CONCAT:" + str(type(image_concat)))
+
     image_concat.audio = audio_composite
     final = CompositeVideoClip([background_clip, image_concat])
     filename = (re.sub('[?\"%*:|<>]', '', ("assets/VideoFinal.mp4")))
