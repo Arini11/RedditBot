@@ -2,7 +2,7 @@
 from rich.console import Console
 
 from reddit.subreddit import get_subreddit_threads, traduir, generarHTML
-from video_creation.background import download_background, chop_background_video, backgroud_music
+from video_creation.background import download_background, chop_background_video
 from video_creation.voices import save_text_to_mp3
 from video_creation.screenshot_downloader import download_screenshots_of_reddit_posts
 from video_creation.final_video import make_final_video
@@ -23,10 +23,8 @@ REQUIRED_VALUES = [
 
 
 """
-
 Load .env file if exists. If it doesnt exist, print a warning and launch the setup wizard.
 If there is a .env file, check if the required variables are set. If not, print a warning and launch the setup wizard.
-
 """
 
 client_id = os.getenv("REDDIT_CLIENT_ID")
@@ -92,4 +90,3 @@ if configured:
     download_background()
     chop_background_video(length)
     final_video = make_final_video(number_of_comments)
-    backgroud_music(length)

@@ -56,39 +56,24 @@ def download_background():
 
 def chop_background_video(video_length):
     print_step("Finding a spot in the background video to chop...")
-    background = VideoFileClip("assets/mp4/background.mp4")
+    background_video = VideoFileClip("assets/mp4/background.mp4")
 
-    start_time, end_time = get_start_and_end_times(video_length, background.duration)
+    start_time, end_time = get_start_and_end_times(video_length, background_video.duration)
     ffmpeg_extract_subclip(
         "assets/mp4/background.mp4",
         start_time,
         end_time,
         targetname="assets/mp4/clip.mp4",
     )
-    print_substep("Background video chopped successfully!", style="bold green")
 
+    video = VideoFileClip(os.path.join("assets/musica/background_music.mp4"))
+    video.audio.write_audiofile(os.path.join("assets/musica/background_music_mp3.mp3"))
 
-def backgroud_music(video_length):
-    print_step("Retallant la musica de fons")
-    background = VideoFileClip("assets/musica/background_music.mp4")
-
-    start_time, end_time = get_start_and_end_times(video_length, background.duration)
     ffmpeg_extract_subclip(
-        "assets/musica/background_music.mp4",
+        "assets/musica/background_music_mp3.mp3",
         start_time,
         end_time,
-        targetname="assets/musica/clipMusicaVideo.mp4",
+        targetname="assets/musica/background_music_mp3_clip.mp3",
     )
 
-    video = "assets/musica/clipMusicaVideo.mp4"
-    audio = "assets/musica/clipMusica.mp3"
-
-    videoClip = VideoFileClip(video)
-
-    audioClip = videoClip.audio
-    audioClip.write_audiofile(audio)
-
-    audioClip.close()
-    videoClip.close()
-
-    print_substep("Musica incrustada correctament", style="bold green")
+    print_substep("Background video chopped successfully!", style="bold green")
