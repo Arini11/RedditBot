@@ -8,4 +8,4 @@ venv/
 *.mp4
 **/__pycache__/
 proves/
-*.html
+index.html
