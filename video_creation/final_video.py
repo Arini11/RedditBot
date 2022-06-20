@@ -29,7 +29,7 @@ def make_final_video(number_of_clips):
         VideoFileClip("assets/mp4/clip.mp4")
         .without_audio()
         .resize(height=H)
-        .crop(x1=1166.6, y1=0, x2=2246.6, y2=1920)
+        .crop(x1=1166.6, y1=0, x2=2246.6, y2=1920),
     )
 
     # Gather all audio clips
@@ -76,7 +76,7 @@ def make_final_video(number_of_clips):
         ("center", "center")
     )
     image_concat.audio = audio_composite
-    final = CompositeVideoClip([background_clip, image_concat, background_sound_clip])
+    final = CompositeVideoClip([background_clip, image_concat])
     filename = (re.sub('[?\"%*:|<>]', '', ("assets/VideoFinal.mp4")))
     final.write_videofile(filename, fps=30, audio_codec="aac", audio_bitrate="192k")
     for i in range(0, number_of_clips):
