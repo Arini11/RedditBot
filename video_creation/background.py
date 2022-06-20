@@ -5,14 +5,14 @@ from yt_dlp import YoutubeDL
 
 from pathlib import Path
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-from moviepy.editor import VideoFileClip
+from moviepy.editor import *
 from utils.console import print_step, print_substep
 
 
 def get_start_and_end_times(video_length, length_of_clip):
-
     random_time = randrange(180, int(length_of_clip) - int(video_length))
     return random_time, random_time + video_length
+
 
 def download_background():
     """Downloads the background video from youtube.
@@ -36,6 +36,23 @@ def download_background():
             ydl.download("https://www.youtube.com/watch?v=qu8X8UxBjjM")
 
         print_substep("Background video downloaded successfully!", style="bold green")
+
+    if not Path("assets/musica/background_music.mp4").is_file():
+        print_step(
+            "We need to download Lo-Fi music"
+        )
+
+        print_substep("Downloading the background music...")
+
+        ydl_opts = {
+            "outtmpl": "assets/musica/background_music.mp4",
+            "merge_output_format": "mp4",
+        }
+
+        with YoutubeDL(ydl_opts) as ydl:
+            ydl.download("https://www.youtube.com/watch?v=CWUxKMF2w2U")
+
+        print_substep("Background music downloaded successfully!", style="bold green")
 
 
 def chop_background_video(video_length):
