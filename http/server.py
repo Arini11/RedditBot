@@ -9,3 +9,5 @@ def iniciarServer():
 
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
         httpd.serve_forever()
+
+iniciarServer()

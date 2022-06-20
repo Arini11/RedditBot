@@ -13,10 +13,15 @@ body {
   padding: 30px;
 }
 
+img {
+  border-radius: 50%;
+}
+
 /* HEADING */
 
 .heading {
   text-align: center;
+  width: fit-content;º
 }
 
 .heading__title {
